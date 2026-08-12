@@ -5,3 +5,6 @@ session-png: media/session.svg
 
 icon-png: media/icon.svg
 	rsvg-convert -w 240 media/icon.svg -o media/icon.png
+
+serve:
+	python -m http.server
