@@ -1,0 +1,12 @@
+[tools.github]
+allowed_operations = [
+  "repo_view", "issue_list", "issue_view", "pr_list", "pr_view",
+  "pr_reviews", "pr_comments",
+  "workflow_list", "workflow_view", "workflow_logs",
+  "release_list", "release_view",
+  "pr_create", "release_create"
+]
+
+[tools.git]
+enabled = true
+auto_permission = ["status", "log", "diff", "branch", "show", "commit", "add", "checkout"]

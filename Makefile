@@ -1,12 +1,7 @@
-YOKER=uv run --with ../yoker yoker
+-include ~/.yoker/Makefile
 
-all: yoker-chat
+session-png: media/session.svg
+	rsvg-convert -w 1482 media/session.svg -o media/session.png
 
-init: yoker.toml
-
-yoker-chat: yoker.toml
-	@$(YOKER) chat
-
-yoker.toml:
-	@echo "*** initializing yoker.toml"
-	@$(YOKER) init --path ./yoker.toml
+icon-png: media/icon.svg
+	rsvg-convert -w 240 media/icon.svg -o media/icon.png
