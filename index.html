@@ -1,422 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yoker — The Python-first agent harness framework</title>
-  <style>
-    :root {
-      --c1: #1B3C53;
-      --c2: #234C6A;
-      --c3: #456882;
-      --c4: #D2C1B6;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: var(--c1);
-      color: var(--c4);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+---
+layout: default
+hide_nav: true
+---
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 2rem 2rem 1rem;
-      background: linear-gradient(180deg, var(--c1) 0%, var(--c2) 100%);
-    }
-    .hero img {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      letter-spacing: -1px;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-    .hero .tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      color: var(--c4);
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-    }
-    .cta {
-      font-size: 1.05rem;
-      color: var(--c4);
-    }
-    .cta-intro {
-      margin-top: 3rem;
-      margin-bottom: 0.75rem;
-    }
-    .terminal {
-      display: flex;
-      align-items: center;
-      max-width: 320px;
-      margin: 0 auto;
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    .terminal .prompt {
-      color: #1B3C53;
-      font-family: "SF Mono", "Fira Code", "Menlo", monospace;
-      font-size: 1rem;
-      padding: 0 0 0 1rem;
-      user-select: none;
-    }
-    .terminal .cmd {
-      color: #1B3C53;
-      font-family: "SF Mono", "Fira Code", "Menlo", monospace;
-      font-size: 1rem;
-      padding: 0.85rem 0.5rem 0.85rem 0.5rem;
-      flex: 1;
-      white-space: nowrap;
-    }
-    .terminal .copy-btn {
-      background: #1B3C53;
-      color: #D2C1B6;
-      border: none;
-      padding: 0.85rem 1rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: background 0.15s;
-      white-space: nowrap;
-      align-self: stretch;
-      display: flex;
-      align-items: center;
-    }
-    .terminal .copy-btn:hover {
-      background: #234C6A;
-    }
-    .terminal .copy-btn.copied {
-      background: #2a7a4a;
-      color: #fff;
-    }
-    .hero-links {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .hero-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: transform 0.15s, background 0.15s;
-    }
-    .hero-links a.primary {
-      background: var(--c4);
-      color: var(--c1);
-    }
-    .hero-links a.primary:hover {
-      transform: translateY(-2px);
-      background: #e0d0c4;
-    }
-    .hero-links a.secondary {
-      border: 2px solid var(--c3);
-      color: var(--c4);
-    }
-    .hero-links a.secondary:hover {
-      background: var(--c3);
-      color: #fff;
-    }
-
-    /* Section base */
-    section {
-      padding: 3rem 2rem;
-    }
-    .section-title {
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
-      text-align: center;
-      color: #fff;
-      margin-bottom: 2.5rem;
-      font-weight: 600;
-    }
-
-    /* Generic card — used everywhere */
-    .card {
-      max-width: 800px;
-      margin: 0 auto 2rem;
-      background: var(--c1);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .card .body {
-      padding: 2rem 1.5rem;
-    }
-    .card .body .tag {
-      display: inline-block;
-      background: var(--c3);
-      color: var(--c1);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      margin-bottom: 0.75rem;
-    }
-    .card .body h3 {
-      color: #fff;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .card .body p {
-      font-size: 1.05rem;
-      color: var(--c4);
-      margin-bottom: 1rem;
-    }
-    .card .body .links {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.9rem;
-    }
-    .card .body .links a {
-      color: var(--c4);
-      text-decoration: none;
-      border-bottom: 1px solid var(--c3);
-      padding-bottom: 2px;
-    }
-    .card .body .links a:hover {
-      color: #fff;
-      border-color: var(--c4);
-    }
-    .card video,
-    .card img {
-      width: 100%;
-      display: block;
-      border-top: 2px solid var(--c3);
-    }
-
-    /* Feature cards — stacked, icon left, text right */
-    .features {
-      background: var(--c2);
-      padding: 3rem 2rem;
-    }
-    .feature-card {
-      max-width: 800px;
-      margin: 0 auto 1.5rem;
-      background: var(--c1);
-      border-radius: 12px;
-      padding: 2rem 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .feature-card .icon {
-      font-size: 2.5rem;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-    .feature-card .text {
-      flex: 1;
-    }
-    .feature-card h3 {
-      color: #fff;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .feature-card p {
-      font-size: 1.05rem;
-      color: var(--c4);
-    }
-
-    /* Showcase — on dark bg, cards are lighter (inverse) */
-    .showcase { background: var(--c1); }
-    .showcase .card { background: var(--c2); }
-
-    /* Projects */
-    .projects { background: var(--c2); }
-
-    /* Resources footer */
-    .resources {
-      background: var(--c1);
-      padding-bottom: 4rem;
-    }
-    .resource-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .resource-block h4 {
-      color: #fff;
-      font-size: 1.05rem;
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-    .resource-block a {
-      display: block;
-      color: var(--c4);
-      text-decoration: none;
-      font-size: 0.95rem;
-      padding: 0.25rem 0;
-    }
-    .resource-block a:hover {
-      color: #fff;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      body { font-size: 13px; }
-      .hero { padding: 1.5rem 0.5rem 1rem; }
-      section, .features { padding: 2rem 0.5rem; }
-      .hero-links a { font-size: 0.85rem; padding: 0.5rem 1rem; }
-      .feature-card { padding: 1.5rem 1rem; gap: 1rem; max-width: 100%; }
-      .feature-card .icon { font-size: 2rem; }
-      .feature-card h3 { font-size: 1.1rem; }
-      .feature-card p { font-size: 0.95rem; }
-      .card { max-width: 100%; }
-      .card .body { padding: 1.5rem 1rem; }
-      .card .body h3 { font-size: 1.1rem; }
-      .card .body p { font-size: 0.95rem; }
-      .terminal { max-width: 100%; }
-      .resource-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Hero -->
-  <div class="hero">
-    <img src="media/icon.png" alt="Yoker">
-    <h1>Yoker</h1>
-    <p class="tagline">The Python-first agent harness framework.</p>
-    <div class="hero-links">
-      <a class="primary" href="https://github.com/christophevg/yoker">★ GitHub</a>
-      <a class="secondary" href="https://pypi.org/project/yoker/">PyPI</a>
-      <a class="secondary" href="https://yoker.readthedocs.io/">Docs</a>
-    </div>
-    <div class="cta">
-      <div class="cta-intro">Can't wait? Try it right now:</div>
-      <div class="terminal">
-        <span class="prompt">$</span>
-        <span class="cmd">uvx yoker</span>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('uvx yoker').then(()=>{this.innerHTML='<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;#fff&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';this.classList.add('copied');setTimeout(()=>{this.innerHTML='<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;13&quot; height=&quot;13&quot; rx=&quot;2&quot; ry=&quot;2&quot;/><path d=&quot;M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1&quot;/></svg>';this.classList.remove('copied')},2000)})"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
-      </div>
+<!-- Hero -->
+<div class="hero">
+  <img src="{{ '/media/icon.png' | relative_url }}" alt="Yoker">
+  <h1>Yoker</h1>
+  <p class="tagline">The Python-first agent harness framework.</p>
+  <div class="hero-links">
+    <a class="primary" href="https://github.com/christophevg/yoker">&#9733; GitHub</a>
+    <a class="secondary" href="https://pypi.org/project/yoker/">PyPI</a>
+    <a class="secondary" href="https://yoker.readthedocs.io/">Docs</a>
+    <a class="secondary" href="{{ '/blog/' | relative_url }}">Blog</a>
+  </div>
+  <div class="cta">
+    <div class="cta-intro">Can't wait? Try it right now:</div>
+    <div class="terminal">
+      <span class="prompt">$</span>
+      <span class="cmd">uvx yoker</span>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('uvx yoker').then(()=>{this.innerHTML='<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;#fff&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';this.classList.add('copied');setTimeout(()=>{this.innerHTML='<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;><rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;13&quot; height=&quot;13&quot; rx=&quot;2&quot; ry=&quot;2&quot;/><path d=&quot;M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1&quot;/></svg>';this.classList.remove('copied')},2000)})"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
     </div>
   </div>
+</div>
 
-  <!-- Features -->
-  <section class="features">
-    <div class="feature-card">
-      <div class="icon">🔧</div>
-      <div class="text">
-        <h3>Bring your own tools</h3>
-        <p>Yoker is a Python-first framework. Every Python function is a Tool. Builtin: File access, git, web search, and more. All configurable, all guarded.</p>
-      </div>
+<!-- Features -->
+<section class="features">
+  <div class="feature-card">
+    <div class="icon">&#128736;</div>
+    <div class="text">
+      <h3>Bring your own tools</h3>
+      <p>Yoker is a Python-first framework. Every Python function is a Tool. Builtin: File access, git, web search, and more. All configurable, all guarded.</p>
     </div>
-    <div class="feature-card">
-      <div class="icon">🧠</div>
-      <div class="text">
-        <h3>Any LLM you want</h3>
-        <p>We like Ollama a lot, but also support OpenAI, Anthropic, Gemini, and 100+ more. Switch providers without changing your code.</p>
-      </div>
+  </div>
+  <div class="feature-card">
+    <div class="icon">&#129504;</div>
+    <div class="text">
+      <h3>Any LLM you want</h3>
+      <p>We like Ollama a lot, but also support OpenAI, Anthropic, Gemini, and 100+ more. Switch providers without changing your code.</p>
     </div>
-    <div class="feature-card">
-      <div class="icon">🛡️</div>
-      <div class="text">
-        <h3>Safe by design</h3>
-        <p>No <code>Bash()</code> tool, by design. Static permissions, trust gates and protected files. You decide what an agent can touch. All improving autonomy.</p>
-      </div>
+  </div>
+  <div class="feature-card">
+    <div class="icon">&#128737;</div>
+    <div class="text">
+      <h3>Safe by design</h3>
+      <p>No <code>Bash()</code> tool, by design. Static permissions, trust gates and protected files. You decide what an agent can touch. All improving autonomy.</p>
     </div>
-    <div class="feature-card">
-      <div class="icon">📦</div>
-      <div class="text">
-        <h3>Embed anywhere</h3>
-        <p>Use it as a library in your app, as a CLI, chat with your favorite model or run agentic packages directly from GitHub. Your choice.</p>
-      </div>
+  </div>
+  <div class="feature-card">
+    <div class="icon">&#128230;</div>
+    <div class="text">
+      <h3>Embed anywhere</h3>
+      <p>Use it as a library in your app, as a CLI, chat with your favorite model or run agentic packages directly from GitHub. Your choice.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- See it in action -->
-  <section class="showcase">
-    <h2 class="section-title">See it in action</h2>
-    <div class="card">
-      <div class="body">
-        <h3>Bootstrap Wizard</h3>
-        <p>Get started in seconds! The interactive bootstrap wizard helps you setup Yoker in under 90 seconds (depending on how fast you read and type) and writes your first config file for you.</p>
-      </div>
-      <video controls preload="metadata">
-        <source src="media/bootstrap-2.mov#t=0.1" type="video/mp4">
-      </video>
+<!-- See it in action -->
+<section class="showcase">
+  <h2 class="section-title">See it in action</h2>
+  <div class="card">
+    <div class="body">
+      <h3>Bootstrap Wizard</h3>
+      <p>Get started in seconds! The interactive bootstrap wizard helps you setup Yoker in under 90 seconds (depending on how fast you read and type) and writes your first config file for you.</p>
     </div>
-    <div class="card">
-      <div class="body">
-        <h3>Interactive Session</h3>
-        <p>Implemented using the framework: Have an interactive chat with an agent, including tool calls, thinking mode, streaming output, all in the terminal.</p>
-      </div>
-      <img src="media/about-yoker.png" alt="A Yoker chat session with tool calls and streaming output">
+    <video controls preload="metadata">
+      <source src="{{ '/media/bootstrap-2.mov' | relative_url }}#t=0.1" type="video/mp4">
+    </video>
+  </div>
+  <div class="card">
+    <div class="body">
+      <h3>Interactive Session</h3>
+      <p>Implemented using the framework: Have an interactive chat with an agent, including tool calls, thinking mode, streaming output, all in the terminal.</p>
     </div>
-  </section>
+    <img src="{{ '/media/about-yoker.png' | relative_url }}" alt="A Yoker chat session with tool calls and streaming output">
+  </div>
+</section>
 
-  <!-- Built with Yoker -->
-  <section class="projects">
-    <h2 class="section-title">Built with Yoker</h2>
-    <div class="card">
-      <div class="body">
-        <span class="tag">yoker-as-SDK</span>
-        <h3>Yoker Assistant</h3>
-        <p>A personal assistant that communicates by email. You email it, it reasons, acts, and replies — no UI needed. Personality and learning behaviour included!</p>
-        <div class="links">
-          <a href="https://github.com/christophevg/yoker-assistant">GitHub</a>
-          <a href="https://pypi.org/project/yoker-assistant/">PyPI</a>
-          <a href="https://yoker-assistant.readthedocs.io/">Docs</a>
-        </div>
-      </div>
-      <video controls preload="metadata">
-        <source src="media/assistant-1.mov#t=0.1" type="video/mp4">
-      </video>
-    </div>
-    <div class="card">
-      <div class="body">
-        <span class="tag">yoker-as-runtime</span>
-        <h3>Yoker Writing Assistant</h3>
-        <p>A writing coach that supports your writing: reviews, challenges and flags, but never writes for you.</p>
-        <div class="links">
-          <a href="https://github.com/christophevg/yoker-writing-assistant">GitHub</a>
-          <a href="https://pypi.org/project/yoker-writing-assistant/">PyPI</a>
-          <a href="https://yoker-writing-assistant.readthedocs.io/">Docs</a>
-        </div>
-      </div>
-      <video controls preload="metadata">
-        <source src="media/writing-assistant-1.mov#t=0.1" type="video/mp4">
-      </video>
-    </div>
-  </section>
-
-  <!-- Resources -->
-  <section class="resources">
-    <div class="resource-grid">
-      <div class="resource-block">
-        <h4>Yoker</h4>
-        <a href="https://github.com/christophevg/yoker">GitHub Repository</a>
-        <a href="https://pypi.org/project/yoker/">PyPI Package</a>
-        <a href="https://yoker.readthedocs.io/">ReadTheDocs</a>
-      </div>
-      <div class="resource-block">
-        <h4>Yoker Assistant</h4>
-        <a href="https://github.com/christophevg/yoker-assistant">GitHub Repository</a>
-        <a href="https://pypi.org/project/yoker-assistant/">PyPI Package</a>
-        <a href="https://yoker-assistant.readthedocs.io/">ReadTheDocs</a>
-      </div>
-      <div class="resource-block">
-        <h4>Yoker Writing Assistant</h4>
-        <a href="https://github.com/christophevg/yoker-writing-assistant">GitHub Repository</a>
-        <a href="https://pypi.org/project/yoker-writing-assistant/">PyPI Package</a>
-        <a href="https://yoker-writing-assistant.readthedocs.io/">ReadTheDocs</a>
+<!-- Built with Yoker -->
+<section class="projects">
+  <h2 class="section-title">Built with Yoker</h2>
+  <div class="card">
+    <div class="body">
+      <span class="tag">yoker-as-SDK</span>
+      <h3>Yoker Assistant</h3>
+      <p>A personal assistant that communicates by email. You email it, it reasons, acts, and replies — no UI needed. Personality and learning behaviour included!</p>
+      <div class="links">
+        <a href="https://github.com/christophevg/yoker-assistant">GitHub</a>
+        <a href="https://pypi.org/project/yoker-assistant/">PyPI</a>
+        <a href="https://yoker-assistant.readthedocs.io/">Docs</a>
       </div>
     </div>
-  </section>
-
-</body>
-</html>
+    <video controls preload="metadata">
+      <source src="{{ '/media/assistant-1.mov' | relative_url }}#t=0.1" type="video/mp4">
+    </video>
+  </div>
+  <div class="card">
+    <div class="body">
+      <span class="tag">yoker-as-runtime</span>
+      <h3>Yoker Writing Assistant</h3>
+      <p>A writing coach that supports your writing: reviews, challenges and flags, but never writes for you.</p>
+      <div class="links">
+        <a href="https://github.com/christophevg/yoker-writing-assistant">GitHub</a>
+        <a href="https://pypi.org/project/yoker-writing-assistant/">PyPI</a>
+        <a href="https://yoker-writing-assistant.readthedocs.io/">Docs</a>
+      </div>
+    </div>
+    <video controls preload="metadata">
+      <source src="{{ '/media/writing-assistant-1.mov' | relative_url }}#t=0.1" type="video/mp4">
+    </video>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+[project]
+name = "yoker-dev"
+version = "0.1.0"
+description = "The Yoker main website"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "yoker-writing-assistant"
+]

@@ -1,0 +1,22 @@
+title: Yoker
+description: The Python-first agent harness framework
+url: https://yoker.dev
+
+permalink: /blog/:year/:month/:day/:title/
+
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+
+exclude:
+  - Makefile
+  - README.md
+  - yoker.toml
+  - Gemfile
+  - Gemfile.lock
+  - local/
+  - pyproject.toml
+  - uv.lock
+  - AGENTS.md

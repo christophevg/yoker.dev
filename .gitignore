@@ -1,6 +1,16 @@
+local/
 /context
-.DS_Store
-.python-version
-main.py
-pyproject.toml
 uv.lock
+
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby/Bundler
+.bundle/
+vendor/
+Gemfile.lock
+
+# OS files
+.DS_Store

@@ -1,0 +1,741 @@
+:root {
+  --c1: #1B3C53;
+  --c2: #234C6A;
+  --c3: #456882;
+  --c4: #D2C1B6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--c1);
+  color: var(--c4);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nav */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  background: var(--c1);
+}
+.site-nav .nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.site-nav .nav-brand img {
+  width: 32px;
+  height: 32px;
+}
+.site-nav .nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.site-nav .nav-links a {
+  color: var(--c4);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+.site-nav .nav-links a:hover {
+  color: #fff;
+}
+
+/* Page content wrapper — lighter background between nav and footer */
+.page-content {
+  background: var(--c2);
+  flex: 1;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 2rem 2rem 1rem;
+  background: var(--c1);
+}
+.hero img {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.hero .tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--c4);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+.cta {
+  font-size: 1.05rem;
+  color: var(--c4);
+  margin-bottom: 1rem;
+}
+.cta-intro {
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+}
+.terminal {
+  display: flex;
+  align-items: center;
+  max-width: 320px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.terminal .prompt {
+  color: #1B3C53;
+  font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+  font-size: 1rem;
+  padding: 0 0 0 1rem;
+  user-select: none;
+}
+.terminal .cmd {
+  color: #1B3C53;
+  font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+  font-size: 1rem;
+  padding: 0.85rem 0.5rem 0.85rem 0.5rem;
+  flex: 1;
+  white-space: nowrap;
+}
+.terminal .copy-btn {
+  background: #1B3C53;
+  color: #D2C1B6;
+  border: none;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+.terminal .copy-btn:hover {
+  background: #234C6A;
+}
+.terminal .copy-btn.copied {
+  background: #2a7a4a;
+  color: #fff;
+}
+.hero-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: transform 0.15s, background 0.15s;
+}
+.hero-links a.primary {
+  background: var(--c4);
+  color: var(--c1);
+}
+.hero-links a.primary:hover {
+  transform: translateY(-2px);
+  background: #e0d0c4;
+}
+.hero-links a.secondary {
+  border: 2px solid var(--c3);
+  color: var(--c4);
+}
+.hero-links a.secondary:hover {
+  background: var(--c3);
+  color: #fff;
+}
+
+/* Section base */
+section {
+  padding: 3rem 2rem;
+}
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  text-align: center;
+  color: #fff;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
+/* Generic card */
+.card {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  background: var(--c1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card .body {
+  padding: 2rem 1.5rem;
+}
+.card .body .tag {
+  display: inline-block;
+  background: var(--c3);
+  color: var(--c1);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+.card .body h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.card .body p {
+  font-size: 1.05rem;
+  color: var(--c4);
+  margin-bottom: 1rem;
+}
+.card .body .links {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+.card .body .links a {
+  color: var(--c4);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c3);
+  padding-bottom: 2px;
+}
+.card .body .links a:hover {
+  color: #fff;
+  border-color: var(--c4);
+}
+.card video,
+.card img {
+  width: 100%;
+  display: block;
+  border-top: 2px solid var(--c3);
+}
+
+/* Feature cards */
+.features {
+  background: var(--c2);
+  padding: 3rem 2rem;
+}
+.feature-card {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  background: var(--c1);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.feature-card .icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.feature-card .text {
+  flex: 1;
+}
+.feature-card h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.feature-card p {
+  font-size: 1.05rem;
+  color: var(--c4);
+}
+
+/* Showcase */
+.showcase { background: var(--c1); }
+.showcase .card { background: var(--c2); }
+
+/* Projects */
+.projects { background: var(--c2); }
+
+/* Footer */
+.site-footer {
+  background: var(--c1);
+  padding: 3rem 2rem 4rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.footer-block h4 {
+  color: #fff;
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+.footer-block a {
+  display: block;
+  color: var(--c4);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+}
+.footer-block a:hover {
+  color: #fff;
+}
+
+/* Page header (for non-home pages) */
+.page-header {
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+}
+.page-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.page-header p {
+  font-size: 1.1rem;
+  color: var(--c4);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Blog post list */
+.post-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.post-list-item {
+  background: var(--c2);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.post-list-item .post-date {
+  font-size: 0.85rem;
+  color: var(--c3);
+  margin-bottom: 0.5rem;
+}
+.post-list-item h2 {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.post-list-item h2 a {
+  color: #fff;
+  text-decoration: none;
+}
+.post-list-item h2 a:hover {
+  color: var(--c4);
+}
+.post-list-item .post-excerpt {
+  color: var(--c4);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+.post-list-item .post-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.post-list-item .post-tags span {
+  background: var(--c3);
+  color: var(--c1);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+/* Blog post content */
+.post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.post-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--c3);
+}
+.post-header h1 {
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 0.5rem;
+}
+.post-header .post-meta {
+  color: var(--c3);
+  font-size: 0.95rem;
+}
+.post-header .post-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+.post-header .post-tags span {
+  background: var(--c3);
+  color: var(--c1);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+.post-content {
+  color: var(--c4);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.post-content h1 { font-size: 1.8rem; }
+.post-content h2 { font-size: 1.5rem; }
+.post-content h3 { font-size: 1.25rem; }
+.post-content p {
+  margin-bottom: 1.25rem;
+}
+.post-content a {
+  color: var(--c4);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c3);
+}
+.post-content a:hover {
+  color: #fff;
+  border-color: var(--c4);
+}
+.post-content ul,
+.post-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.post-content li {
+  margin-bottom: 0.5rem;
+}
+.post-content code {
+  font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+  font-size: 0.9em;
+  background: rgba(255,255,255,0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  color: #fff;
+}
+.post-content pre {
+  margin-bottom: 1.25rem;
+}
+.post-content pre code {
+  background: none;
+  padding: 0;
+  color: var(--c4);
+  font-size: 0.9rem;
+}
+.post-content blockquote {
+  border-left: 3px solid var(--c3);
+  padding-left: 1rem;
+  margin-bottom: 1.25rem;
+  color: var(--c3);
+  font-style: italic;
+}
+.post-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+}
+.post-content hr {
+  border: none;
+  border-top: 1px solid var(--c3);
+  margin: 2rem 0;
+}
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem;
+}
+.post-content th,
+.post-content td {
+  border: 1px solid var(--c3);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.post-content th {
+  color: #fff;
+  background: var(--c2);
+}
+.back-to-blog {
+  display: inline-block;
+  margin-top: 2rem;
+  color: var(--c4);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--c3);
+  padding-bottom: 2px;
+}
+.back-to-blog:hover {
+  color: #fff;
+  border-color: var(--c4);
+}
+
+/* Session excerpts (chat logs in blog posts) — styled to match Rich terminal output */
+.session-prompt,
+.session-agent {
+  margin: 2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f3f0;
+  padding: 0.5rem 1.25rem 1.25rem;
+  font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.session-prompt {
+  border-left: 3px solid var(--c4);
+}
+.session-agent {
+  border-left: 3px solid var(--c3);
+}
+.session-prompt::before,
+.session-agent::before {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0 0.75rem;
+  margin: 0;
+}
+.session-prompt::before {
+  content: "Me";
+  color: var(--c3);
+}
+.session-agent::before {
+  content: "Agent";
+  color: var(--c3);
+}
+
+.session-prompt {
+  background: rgb(238,238,238);
+  color: #333;
+}
+
+/* Agent: Rich markdown theme mapping */
+.session-agent {
+  color: #333;
+}
+
+/* Headings — all same font size (terminal has no font sizes) */
+.session-agent h1,
+.session-agent h2,
+.session-agent h3,
+.session-agent h4,
+.session-agent h5,
+.session-agent h6 {
+  font-size: 0.9rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+/* h1: bold underline */
+.session-agent h1 {
+  font-weight: 700;
+  text-decoration: underline;
+  color: #333;
+}
+/* h2: underline magenta */
+.session-agent h2 {
+  font-weight: 400;
+  text-decoration: underline;
+  color: #d6279e;
+}
+/* h3: bold magenta */
+.session-agent h3 {
+  font-weight: 700;
+  color: #d6279e;
+}
+/* h4: italic magenta */
+.session-agent h4 {
+  font-weight: 400;
+  font-style: italic;
+  color: #d6279e;
+}
+/* h5: italic */
+.session-agent h5 {
+  font-weight: 400;
+  font-style: italic;
+  color: #333;
+}
+/* h6: dim */
+.session-agent h6 {
+  font-weight: 400;
+  color: #999;
+}
+
+/* Paragraph — none (default) */
+.session-agent p {
+  margin-bottom: 0.75rem;
+}
+
+/* Strong = bold, em = italic */
+.session-agent strong {
+  font-weight: 700;
+}
+.session-agent em {
+  font-style: italic;
+}
+
+/* Strikethrough */
+.session-agent s,
+.session-agent del {
+  text-decoration: line-through;
+}
+
+/* Inline code = dodger_blue1 */
+.session-agent code {
+  font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+  font-size: 0.9rem;
+  background: #edebe6;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  color: #1e6fdb;
+}
+
+/* Code blocks = dodger_blue1 */
+.session-agent pre {
+  background: #edebe6;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+}
+.session-agent pre code {
+  background: none;
+  padding: 0;
+  color: #1e6fdb;
+  font-size: 0.9rem;
+}
+
+/* Block quote = magenta */
+.session-agent blockquote {
+  border: none;
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+  color: #d6279e;
+  font-style: normal;
+}
+
+/* Lists — bullet = bold, number = cyan, list = cyan */
+.session-agent ul,
+.session-agent ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  color: #0aa4c6;
+}
+.session-agent li {
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+.session-agent li::marker {
+  font-weight: 700;
+  color: #0aa4c6;
+}
+
+/* Links = bright_blue */
+.session-agent a {
+  color: #0066ff;
+  text-decoration: none;
+  border-bottom: none;
+}
+.session-agent a:hover {
+  text-decoration: underline;
+}
+
+/* Horizontal rule = dim */
+.session-agent hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 1rem 0;
+}
+
+/* Tables — no borders except header bottom, header + border = cyan */
+.session-agent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+.session-agent th,
+.session-agent td {
+  border: none;
+  padding: 0.3rem 0.6rem;
+  text-align: left;
+}
+.session-agent th {
+  color: #0aa4c6;
+  font-weight: 400;
+  border-bottom: 1px solid #0aa4c6;
+  background: none;
+}
+.session-agent tr:last-child td {
+  border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  body { font-size: 13px; }
+  .site-nav { padding: 0 0.75rem; height: 50px; }
+  .site-nav .nav-brand img { width: 26px; height: 26px; }
+  .site-nav .nav-brand span { font-size: 1rem; }
+  .site-nav .nav-links { gap: 1rem; }
+  .site-nav .nav-links a { font-size: 0.85rem; }
+  .hero { padding: 1.5rem 0.5rem 1rem; }
+  section, .features { padding: 2rem 0.5rem; }
+  .hero-links a { font-size: 0.85rem; padding: 0.5rem 1rem; }
+  .feature-card { padding: 1.5rem 1rem; gap: 1rem; max-width: 100%; }
+  .feature-card .icon { font-size: 2rem; }
+  .feature-card h3 { font-size: 1.1rem; }
+  .feature-card p { font-size: 0.95rem; }
+  .card { max-width: 100%; }
+  .card .body { padding: 1.5rem 1rem; }
+  .card .body h3 { font-size: 1.1rem; }
+  .card .body p { font-size: 0.95rem; }
+  .terminal { max-width: 100%; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .post-list { padding: 1.5rem 0.5rem; }
+  .post-list-item { padding: 1.5rem 1rem; }
+  .post { padding: 1.5rem 0.5rem; }
+  .session-prompt,
+  .session-agent { padding: 0.5rem 0.75rem 1rem; font-size: 0.8rem; }
+}
