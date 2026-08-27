@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background: dark palette gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B3C53" />
+      <stop offset="100%" stop-color="#234C6A" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Decorative subtle accent lines (abstract harness suggestion) -->
+  <path d="M 0,420 C 300,380 400,480 600,420 C 800,360 900,460 1200,400"
+        fill="none" stroke="#456882" stroke-width="2" opacity="0.3" />
+  <path d="M 0,460 C 300,420 400,520 600,460 C 800,400 900,500 1200,440"
+        fill="none" stroke="#456882" stroke-width="2" opacity="0.15" />
+
+  <!-- Icon: scaled up from original 100x100 viewBox, centered-left -->
+  <!-- Original icon path, scaled 3.2x and positioned at (120, 195) -->
+  <g transform="translate(120, 175) scale(3.5)">
+    <!-- Icon background rounded square -->
+    <rect width="100" height="100" rx="22" fill="#1B3C53" stroke="#456882" stroke-width="1.5" />
+
+    <!-- The Abstract Flight Yoke / Harness Structure -->
+    <path d="M 30,35
+             C 22,35 22,55 32,55
+             C 42,55 42,68 50,68
+             C 58,68 58,55 68,55
+             C 78,55 78,35 70,35"
+          fill="none"
+          stroke="#456882"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-linejoin="round" />
+
+    <!-- Central Control Node (The Harness System) -->
+    <circle cx="50" cy="46" r="3.5" fill="#D2C1B6" />
+  </g>
+
+  <!-- "Yoker" wordmark -->
+  <text x="540" y="280"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-size="84"
+        font-weight="700"
+        fill="#D2C1B6">Yoker</text>
+
+  <!-- Tagline -->
+  <text x="540" y="340"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-size="34"
+        font-weight="400"
+        fill="#456882">The Python-first agent harness framework.</text>
+
+  <!-- URL at bottom -->
+  <text x="540" y="510"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-size="26"
+        font-weight="400"
+        fill="#456882"
+        opacity="0.7">yoker.dev</text>
+
+</svg>

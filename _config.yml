@@ -1,6 +1,14 @@
 title: Yoker
 description: The Python-first agent harness framework
 url: https://yoker.dev
+author: Christophe
+logo: /media/icon.png
+
+social:
+  name: Christophe
+  links:
+    - https://christophe.vg
+    - https://github.com/christophevg/yoker
 
 permalink: /blog/:year/:month/:day/:title/
 
@@ -9,6 +17,7 @@ highlighter: rouge
 
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 exclude:
   - Makefile
@@ -20,3 +29,4 @@ exclude:
   - pyproject.toml
   - uv.lock
   - AGENTS.md
+  - research/

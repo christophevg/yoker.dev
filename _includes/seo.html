@@ -1,0 +1,94 @@
+{% comment %}
+  SEO meta tags: canonical URL, Open Graph, Twitter Card, JSON-LD,
+  and meta description. Included in the <head> of default.html.
+  Reads from page and site frontmatter. No plugin dependency.
+{% endcomment %}
+
+{% comment %} -- Canonical URL -- {% endcomment %}
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+{% comment %} -- Meta description (first non-empty) -- {% endcomment %}
+{% assign seo_description = page.excerpt | default: page.description | default: site.description %}
+
+{% comment %} -- Determine page type and image -- {% endcomment %}
+{% if page.date %}{% assign seo_type = "article" %}{% else %}{% assign seo_type = "website" %}{% endif %}
+{% assign seo_image = page.image | default: "/media/og-image.png" %}
+
+{% comment %} -- Standard meta -- {% endcomment %}
+<meta name="description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 }}">
+
+{% comment %} -- Open Graph -- {% endcomment %}
+<meta property="og:title" content="{{ page.title | default: site.title }}">
+<meta property="og:description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:type" content="{{ seo_type }}">
+<meta property="og:image" content="{{ seo_image | absolute_url }}">
+
+{% if page.date %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{% if page.author %}<meta property="article:author" content="{{ page.author }}">{% endif %}
+{% if page.tags %}
+  {% for tag in page.tags %}
+<meta property="article:tag" content="{{ tag }}">
+  {% endfor %}
+{% endif %}
+{% endif %}
+
+{% comment %} -- Twitter Card -- {% endcomment %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ page.title | default: site.title }}">
+<meta name="twitter:description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 }}">
+<meta name="twitter:image" content="{{ seo_image | absolute_url }}">
+
+{% comment %} -- JSON-LD structured data -- {% endcomment %}
+{% if page.date %}
+{% comment %} BlogPosting schema for posts {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ seo_description | strip_html | strip_newlines | truncate: 160 | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "image": "{{ seo_image | absolute_url }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.date | date_to_xmlschema }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ page.author | default: site.author }}",
+    "url": "https://christophe.vg"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ '/media/icon.png' | absolute_url }}"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }
+  {% if page.tags %}
+  , "keywords": {{ page.tags | join: ", " | jsonify }}
+  {% endif %}
+}
+</script>
+{% else %}
+{% comment %} WebSite schema for non-post pages {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "url": "{{ site.url }}",
+  "description": {{ site.description | jsonify }},
+  "image": "{{ '/media/icon.png' | absolute_url }}"
+}
+</script>
+{% endif %}
+
+{% comment %} -- RSS feed link -- {% endcomment %}
+{% feed_meta %}
