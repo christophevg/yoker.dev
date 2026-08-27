@@ -7,6 +7,7 @@ yoker_writing_assistant = true
 
 [permissions]
 filesystem_paths = [".", "~/VOICE.md"]
+blocked_write_paths = [ "~/VOICE.md" ]
 
 [context]
 storage_path = "./local/context"
