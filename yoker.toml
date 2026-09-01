@@ -1,13 +1,16 @@
+[backend.ollama]
+model = "glm-5.3:cloud"
+
+[permissions]
+filesystem_paths = [".", "~/VOICE.md", "../yoker", "../c3"]
+blocked_write_paths = [ "~/VOICE.md" ]
+
 [plugins]
 enabled = true
 packages = ["yoker_writing_assistant"]
 
 [plugins.trusted]
 yoker_writing_assistant = true
-
-[permissions]
-filesystem_paths = [".", "~/VOICE.md"]
-blocked_write_paths = [ "~/VOICE.md" ]
 
 [context]
 storage_path = "./local/context"
@@ -31,5 +34,4 @@ allowed_operations = [
 ]
 
 [tools.git]
-enabled = true
 auto_permission = ["status", "log", "diff", "branch", "show", "commit", "add", "checkout"]
