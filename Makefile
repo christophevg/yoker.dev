@@ -1,4 +1,4 @@
-YOKER_FROM=../yoker
+UV_ARGS=--with yoker-writing-assistant
 -include ~/.yoker/Makefile
 
 session-png: media/session.svg
