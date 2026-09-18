@@ -18,7 +18,7 @@
 <meta name="description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 }}">
 
 {% comment %} -- Open Graph -- {% endcomment %}
-<meta property="og:title" content="{{ page.title | default: site.title }}">
+<meta property="og:title" content="{{ page.title | default: site.title | strip_html }}">
 <meta property="og:description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:site_name" content="{{ site.title }}">
@@ -37,7 +37,7 @@
 
 {% comment %} -- Twitter Card -- {% endcomment %}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ page.title | default: site.title }}">
+<meta name="twitter:title" content="{{ page.title | default: site.title | strip_html }}">
 <meta name="twitter:description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 }}">
 <meta name="twitter:image" content="{{ seo_image | absolute_url }}">
 
@@ -48,7 +48,7 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": {{ page.title | jsonify }},
+  "headline": {{ page.title | default: site.title | strip_html | jsonify }},
   "description": {{ seo_description | strip_html | strip_newlines | truncate: 160 | jsonify }},
   "url": "{{ page.url | absolute_url }}",
   "image": "{{ seo_image | absolute_url }}",
